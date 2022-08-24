@@ -1,4 +1,7 @@
+import 'package:c2ho_hackathon/c2ho_painter.dart';
 import 'package:flutter/material.dart';
+
+import 'animation_controller_buttons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,28 +10,121 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const C2HOPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
+class C2HOPage extends StatefulWidget {
+  const C2HOPage({
+    required this.title,
+    Key? key,
+  }) : super(key: key);
+
+  /// the text to be shown in the app bar
+  final String title;
+
+  @override
+  _C2HOPageState createState() => _C2HOPageState();
+}
+
+class _C2HOPageState extends State<C2HOPage>
+    with SingleTickerProviderStateMixin {
+  /// the duration of the animation (that, is the time it takes to go around the given circle once).
+  /// Milliseconds.
+  final int _periodInMs = 7500;
+  static final _animation = Tween<double>();
+
+  late AnimationController _controller;
+  bool _isPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: _periodInMs),
+    );
+
+    _animation.animate(_controller).addListener(() {
+      // without this , the animation runs but is not visible.
+      setState(() {});
+    });
+  }
+
+  late double _width;
+  late double _height;
+  late Offset _center;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // context is not available in initState, so these calcs must be done here
+    _width = MediaQuery.of(context).size.width;
+    _height = MediaQuery.of(context).size.height;
+    _center = Offset(_width / 2, _height / 2);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Container(
+        child: CustomPaint(
+          foregroundPainter: C2HOPainter(
+            width: _width,
+            height: _height,
+            center: _center,
+          ),
+          child: Container(
+            color: Colors.black87,
+          ),
+        ),
+      ),
+      floatingActionButton: AnimationControllerButtons(
+        isPlaying: _isPlaying,
+        onPressPlayPause: _playOrPause,
+        onPressReset: _reset,
+      ),
+    );
+  }
+
+  void _playOrPause() {
+    setState(() {
+      if (_isPlaying == false) {
+        _controller.repeat();
+        _isPlaying = true;
+      } else {
+        _controller.stop();
+        _isPlaying = false;
+      }
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      _controller.reset();
+      _isPlaying = false;
+    });
+  }
+}
+
+/*
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -113,3 +209,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
