@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class C2HOPainter extends CustomPainter {
@@ -21,9 +23,45 @@ class C2HOPainter extends CustomPainter {
     _paint.color = Colors.green;
 
     _canvas = canvas;
-    _canvas?.drawCircle(center, 50, _paint);
 
-    /*   final movingPt = _drawMovingDotOnCircle();
+    Path cPath = Path();
+    Offset cStart = center;
+    cPath.moveTo(cStart.dx, cStart.dy);
+
+    Rect cRect = Rect.fromCenter(center: center, width: 60, height: 80);
+
+    cPath.addArc(cRect, pi / 5, 3 * pi / 2);
+    _canvas?.drawPath(cPath, _paint);
+
+    Path twoPath = Path();
+    Offset startPoint2 = Offset(center.dx + 60, center.dy + 40);
+    cPath.moveTo(cStart.dx, cStart.dy);
+
+    Rect twoRect = Rect.fromCenter(center: startPoint2, width: 40, height: 40);
+
+    twoPath.addArc(twoRect, 5 * pi / 4, 4 * pi / 3);
+    twoPath.relativeLineTo(40, 0);
+    _canvas?.drawPath(twoPath, _paint);
+
+    _canvas?.drawLine(Offset(center.dx + 100, center.dy + 40),
+        Offset(center.dx + 100, center.dy - 40), _paint);
+
+    _canvas?.drawLine(Offset(center.dx + 150, center.dy + 40),
+        Offset(center.dx + 150, center.dy - 40), _paint);
+
+    _canvas?.drawLine(Offset(center.dx + 100, center.dy),
+        Offset(center.dx + 150, center.dy), _paint);
+
+    _canvas?.drawCircle(Offset(center.dx + 200, center.dy), 35, _paint);
+
+    /*   Offset endPt = Offset(center.dx, center.dy - 50);
+    Offset pt1 = Offset((innerRadius + ctrlPtHeight) * cos(theta - outerWidthDelta),
+        (innerRadius + ctrlPtHeight) * sin(theta - outerWidthDelta));
+    Offset pt2 = Offset((innerRadius + ctrlPtHeight) * cos(theta + innerWidthSweep + outerWidthDelta),
+        (innerRadius + ctrlPtHeight) * sin(theta + innerWidthSweep + outerWidthDelta));
+    path.cubicTo(pt1.dx, pt1.dy, pt2.dx, pt2.dy, endPt.dx, endPt.dy);
+path.addArc(oval, startAngle, sweepAngle)
+     final movingPt = _drawMovingDotOnCircle();
 
     _drawMovingLines(
       movingPt: movingPt,
@@ -31,6 +69,8 @@ class C2HOPainter extends CustomPainter {
 
   */
   }
+
+  _drawC() {}
 
   /*
   Offset _drawMovingDotOnCircle() {

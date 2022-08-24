@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c1c6396-b0fa-47f6-8557-4b98744daf30" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/animation_controller_buttons.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ptolemy_painter.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/c2ho_painter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/c2ho_painter.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
