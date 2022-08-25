@@ -15,24 +15,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const C2HOPage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: C2HOPage(),
     );
   }
 }
 
 class C2HOPage extends StatefulWidget {
   const C2HOPage({
-    required this.title,
     Key? key,
   }) : super(key: key);
-
-  /// the text to be shown in the app bar
-  final String title;
 
   @override
   _C2HOPageState createState() => _C2HOPageState();
@@ -87,9 +80,6 @@ class _C2HOPageState extends State<C2HOPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Container(
         child: CustomPaint(
           foregroundPainter: C2HOPainter(

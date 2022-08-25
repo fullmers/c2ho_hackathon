@@ -5,9 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c1c6396-b0fa-47f6-8557-4b98744daf30" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/bubble.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/.last_build_id" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/assets/AssetManifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/assets/FontManifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/assets/NOTICES" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/assets/fonts/MaterialIcons-Regular.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/canvaskit/canvaskit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/canvaskit/canvaskit.wasm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/canvaskit/profiling/canvaskit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/canvaskit/profiling/canvaskit.wasm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/flutter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/flutter_service_worker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/icons/Icon-192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/icons/Icon-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/icons/Icon-maskable-192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/icons/Icon-maskable-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/web/version.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/c2ho_painter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/c2ho_painter.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +44,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2DogLxKku0qqLVRxPvGH1XLasz2" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" />
     <panes>
@@ -40,6 +60,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="true" />
@@ -64,5 +85,8 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

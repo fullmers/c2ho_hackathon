@@ -1,0 +1,16 @@
+1. Navigate to:
+
+/c2ho_hackathon/build/web
+
+
+2. Run:
+
+python3 -m http.server
+
+3. open a browser and visit 
+
+http://localhost:8000/
+
+4. If the Erlenmeyer flask is not fully visible, enlarge browser window until it is. 
+
+5. Press the Play button.
