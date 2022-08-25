@@ -90,6 +90,7 @@ class _C2HOPageState extends State<C2HOPage>
             width: _width,
             height: _height,
             center: _center,
+            progress: _controller.value,
           ),
           child: Container(
             color: Colors.black87,
@@ -106,12 +107,16 @@ class _C2HOPageState extends State<C2HOPage>
 
   void _playOrPause() {
     setState(() {
-      if (_isPlaying == false) {
+      if (!_isPlaying) {
         _controller.repeat();
         _isPlaying = true;
+        print(_controller.value);
+        print('is not Playing');
       } else {
         _controller.stop();
         _isPlaying = false;
+        print(_controller.value);
+        print('is Playing');
       }
     });
   }
