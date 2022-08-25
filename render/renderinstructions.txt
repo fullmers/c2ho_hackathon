@@ -1,3 +1,8 @@
+This short video walks through the steps below:
+https://www.loom.com/share/be422fe4db214e4bb14150bb962252e1 
+
+------
+
 1. Navigate to:
 
 /c2ho_hackathon/build/web
@@ -11,6 +16,6 @@ python3 -m http.server
 
 http://localhost:8000/
 
-4. If the Erlenmeyer flask is not fully visible, enlarge browser window until it is. 
+4. If the Erlenmyer flask is not fully visible, enlarge browser window until it is. 
 
 5. Press the Play button.
