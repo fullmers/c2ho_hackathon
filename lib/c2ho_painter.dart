@@ -2,18 +2,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import 'bubble.dart';
+
 class C2HOPainter extends CustomPainter {
   C2HOPainter({
     required this.width,
     required this.height,
     required this.center,
     required this.progress,
+    required this.bubbles,
+    required this.totalDuration,
   });
 
   final double width;
   final double height;
   final Offset center;
   final double progress;
+  final List<Bubble> bubbles;
+  final int totalDuration;
 
   final Paint _paint = Paint();
   Canvas? _canvas;
@@ -100,6 +106,22 @@ class C2HOPainter extends CustomPainter {
     flaskBottomPath.relativeLineTo(-60, -120);
 
     _canvas?.drawPath(flaskBottomPath, flaskPaint);
+
+    for (Bubble bubble in bubbles) {
+      drawBubble(canvas, bubble);
+    }
+  }
+
+  void drawBubble(Canvas canvas, Bubble bubble) {
+    Paint paint = Paint();
+
+    double endProgressTime = bubble.startTime + bubble.duration / totalDuration;
+    if ((progress > bubble.startTime) && (progress < endProgressTime)) {
+      final currentProgress =
+          (progress - bubble.startTime) * totalDuration / bubble.duration;
+      paint.color = bubble.color.withOpacity(currentProgress / 4);
+      canvas.drawCircle(bubble.center, bubble.r, paint);
+    }
   }
 
   @override

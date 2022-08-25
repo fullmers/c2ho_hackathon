@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:c2ho_hackathon/c2ho_painter.dart';
 import 'package:flutter/material.dart';
 
 import 'animation_controller_buttons.dart';
+import 'bubble.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,6 +44,8 @@ class _C2HOPageState extends State<C2HOPage>
   /// Milliseconds.
   final int _periodInMs = 7500;
   static final _animation = Tween<double>();
+  final List<Bubble> bubbles = [];
+  final random = Random();
 
   late AnimationController _controller;
   bool _isPlaying = false;
@@ -70,6 +75,7 @@ class _C2HOPageState extends State<C2HOPage>
     _width = MediaQuery.of(context).size.width;
     _height = MediaQuery.of(context).size.height;
     _center = Offset(_width / 2, _height / 2);
+    _createBubbles();
   }
 
   @override
@@ -87,11 +93,12 @@ class _C2HOPageState extends State<C2HOPage>
       body: Container(
         child: CustomPaint(
           foregroundPainter: C2HOPainter(
-            width: _width,
-            height: _height,
-            center: _center,
-            progress: _controller.value,
-          ),
+              width: _width,
+              height: _height,
+              center: _center,
+              progress: _controller.value,
+              bubbles: bubbles,
+              totalDuration: _periodInMs),
           child: Container(
             color: Colors.black87,
           ),
@@ -105,18 +112,36 @@ class _C2HOPageState extends State<C2HOPage>
     );
   }
 
+  void _createBubbles() {
+    bubbles.clear();
+
+    const minRadius = 10;
+
+    const numBubbles = 30;
+
+    for (int i = 0; i < numBubbles; i++) {
+      final r = minRadius + random.nextDouble() * 50;
+      final center = getRandomCenter();
+
+      Bubble bubble = Bubble(
+        center: center,
+        r: r,
+        color: getRandomColor(),
+        startTime: random.nextDouble(),
+        duration: 2000,
+      );
+      bubbles.add(bubble);
+    }
+  }
+
   void _playOrPause() {
     setState(() {
       if (!_isPlaying) {
         _controller.repeat();
         _isPlaying = true;
-        print(_controller.value);
-        print('is not Playing');
       } else {
         _controller.stop();
         _isPlaying = false;
-        print(_controller.value);
-        print('is Playing');
       }
     });
   }
@@ -127,91 +152,24 @@ class _C2HOPageState extends State<C2HOPage>
       _isPlaying = false;
     });
   }
-}
 
-/*
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final List<Color> palette = [
+    Colors.red[500]!,
+    Colors.redAccent[700]!,
+    Colors.green[500]!,
+    Colors.lightGreen[300]!,
+    Colors.deepPurpleAccent,
+    Colors.deepPurple[200]!,
+    Colors.blueAccent[200]!,
+    Colors.blueAccent[100]!,
+    Colors.orangeAccent,
+    Colors.orangeAccent[700]!,
+  ];
+  Color getRandomColor() => palette[random.nextInt(palette.length)];
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+  Offset getRandomCenter() {
+    double dx = random.nextDouble() * _width;
+    double dy = random.nextDouble() * _height;
+    return Offset(dx, dy);
   }
 }
-*/
