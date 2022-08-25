@@ -24,17 +24,19 @@ class C2HOPainter extends CustomPainter {
 
     _canvas = canvas;
 
+    Offset startPoint = Offset(center.dx - width / 3, center.dx - height / 3);
+
     Path cPath = Path();
-    Offset cStart = center;
+    Offset cStart = startPoint;
     cPath.moveTo(cStart.dx, cStart.dy);
 
-    Rect cRect = Rect.fromCenter(center: center, width: 60, height: 80);
+    Rect cRect = Rect.fromCenter(center: startPoint, width: 60, height: 80);
 
     cPath.addArc(cRect, pi / 5, 3 * pi / 2);
     _canvas?.drawPath(cPath, _paint);
 
     Path twoPath = Path();
-    Offset startPoint2 = Offset(center.dx + 60, center.dy + 40);
+    Offset startPoint2 = Offset(startPoint.dx + 60, startPoint.dy + 40);
     cPath.moveTo(cStart.dx, cStart.dy);
 
     Rect twoRect = Rect.fromCenter(center: startPoint2, width: 40, height: 40);
@@ -43,16 +45,51 @@ class C2HOPainter extends CustomPainter {
     twoPath.relativeLineTo(40, 0);
     _canvas?.drawPath(twoPath, _paint);
 
-    _canvas?.drawLine(Offset(center.dx + 100, center.dy + 40),
-        Offset(center.dx + 100, center.dy - 40), _paint);
+    _canvas?.drawLine(Offset(startPoint.dx + 100, startPoint.dy + 40),
+        Offset(startPoint.dx + 100, startPoint.dy - 40), _paint);
 
-    _canvas?.drawLine(Offset(center.dx + 150, center.dy + 40),
-        Offset(center.dx + 150, center.dy - 40), _paint);
+    _canvas?.drawLine(Offset(startPoint.dx + 150, startPoint.dy + 40),
+        Offset(startPoint.dx + 150, startPoint.dy - 40), _paint);
 
-    _canvas?.drawLine(Offset(center.dx + 100, center.dy),
-        Offset(center.dx + 150, center.dy), _paint);
+    _canvas?.drawLine(Offset(startPoint.dx + 100, startPoint.dy),
+        Offset(startPoint.dx + 150, startPoint.dy), _paint);
 
-    _canvas?.drawCircle(Offset(center.dx + 200, center.dy), 35, _paint);
+    _canvas?.drawCircle(Offset(startPoint.dx + 200, startPoint.dy), 35, _paint);
+
+    _canvas?.drawCircle(
+        Offset(startPoint.dx + 270, startPoint.dy + 80), 27, _paint);
+
+    _canvas?.drawCircle(
+        Offset(startPoint.dx + 320, startPoint.dy + 140), 15, _paint);
+
+    //draw Erlenmeyer Flask
+    Offset flaskStart = Offset(startPoint.dx + 350, startPoint.dy + 170);
+    double lipLength = 80;
+    _canvas?.drawLine(
+        flaskStart, Offset(flaskStart.dx + lipLength, flaskStart.dy), _paint);
+
+    double lipMargin = 10;
+    double neckHeight = 100;
+    _canvas?.drawLine(Offset(flaskStart.dx + lipMargin, flaskStart.dy),
+        Offset(flaskStart.dx + lipMargin, flaskStart.dy + neckHeight), _paint);
+
+    _canvas?.drawLine(
+        Offset(flaskStart.dx + lipLength - lipMargin, flaskStart.dy),
+        Offset(
+            flaskStart.dx + lipLength - lipMargin, flaskStart.dy + neckHeight),
+        _paint);
+
+    Path flaskBottomPath = Path();
+    Offset flaskBottomStartPt =
+        Offset(flaskStart.dx + lipMargin, flaskStart.dy + neckHeight);
+    flaskBottomPath.moveTo(flaskBottomStartPt.dx, flaskBottomStartPt.dy);
+    flaskBottomPath.lineTo(
+        flaskBottomStartPt.dx - 60, flaskBottomStartPt.dy + 120);
+
+    flaskBottomPath.relativeLineTo(180, 0);
+    flaskBottomPath.relativeLineTo(-60, -120);
+
+    _canvas?.drawPath(flaskBottomPath, _paint);
 
     /*   Offset endPt = Offset(center.dx, center.dy - 50);
     Offset pt1 = Offset((innerRadius + ctrlPtHeight) * cos(theta - outerWidthDelta),
